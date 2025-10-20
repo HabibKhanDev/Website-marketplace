@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Register</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      width: 250px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #00c6ff; color: #fff; }
+    .box { background: rgba(255,255,255,0.15); padding: 30px; border-radius: 15px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🔐 Login / Register</h2>
+
+    <input type="email" id="email" placeholder="Enter Email" />
+    <input type="password" id="password" placeholder="Enter Password" />
+
+    <button id="registerBtn">Register</button>
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // 🔧 Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAl-8ltnzgt_oKER5UAD1bh4sgDKPm0w_A",
+      authDomain: "website-754f4.firebaseapp.com",
+      projectId: "website-754f4",
+      storageBucket: "website-754f4.firebasestorage.app",
+      messagingSenderId: "1056835843829",
+      appId: "1:1056835843829:web:9f84b539d7a19b094ff7bc",
+      measurementId: "G-6NK4XLM5P0"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🧾 Register User
+    document.getElementById("registerBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("✅ Registered Successfully: " + userCredential.user.email);
+        })
+        .catch((error) => {
+          alert("❌ Error: " + error.message);
+        });
+    });
+
+    // 🔐 Login User
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          alert("✅ Login Successful! Welcome " + user.email);
+          // Redirect to dashboard or role select page
+          window.location.href = "deshboard.html";
+        })
+        .catch((error) => {
+          alert("❌ Login Failed: " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>
