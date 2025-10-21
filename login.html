@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Register</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px 30px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease forwards;
+  }
+
+  h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transition: 0.3s;
+  }
+
+  input::placeholder {
+    color: #ddd;
+  }
+
+  input:focus {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.02);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    box-shadow: 0 5px 15px rgba(0,114,255,0.4);
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,114,255,0.6);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive for small phones */
+  @media (max-width: 400px) {
+    .box {
+      width: 90%;
+      padding: 30px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h2>🔐 Login / Register</h2>
+
+    <input type="email" id="email" placeholder="Enter Email" />
+    <input type="password" id="password" placeholder="Enter Password" />
+
+    <button id="registerBtn">Register</button>
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword 
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // 🔧 Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAl-8ltnzgt_oKER5UAD1bh4sgDKPm0w_A",
+      authDomain: "website-754f4.firebaseapp.com",
+      projectId: "website-754f4",
+      storageBucket: "website-754f4.firebasestorage.app",
+      messagingSenderId: "1056835843829",
+      appId: "1:1056835843829:web:9f84b539d7a19b094ff7bc",
+      measurementId: "G-6NK4XLM5P0"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🧾 Register User
+    document.getElementById("registerBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("✅ Registered Successfully: " + userCredential.user.email);
+        })
+        .catch((error) => {
+          alert("❌ Error: " + error.message);
+        });
+    });
+
+    // 🔐 Login User
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          alert("✅ Login Successful! Welcome " + user.email);
+          // Redirect to dashboard or role select page
+          window.location.href = "deshboard.html";
+        })
+        .catch((error) => {
+          alert("❌ Login Failed: " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>

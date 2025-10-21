@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy Marketplace</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body { margin:0; font-family:Poppins,sans-serif; background:#f0f4f8; color:#333; }
+header {
+  
+background: darkgrey;
+
+  padding: 2px 4px;
+  text-align: center;
+  border-radius: 0 0 180px 180px;         /* optional */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #6a11cb;
+   support */
+  padding: 10px 20px; /* تھوڑا padding دے دیں تاکہ text readable ہو */
+  border-radius: 100px; /* corners smooth کرنے کے لیے */
+}
+.hero {
+  background-image: url('Images/web.jpg'); 
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: papayawhip;  
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+  padding: 90px 20px;    
+  text-align: center;  
+}
+.hero p { font-size:20px; max-width: 800px; margin: auto 20px; 
+  color: darkorange;
+}
+#projects { display:flex; flex-wrap:wrap; justify-content:center; gap:25px; margin:40px 20px; }
+.project-card {
+  background: darkslategrey;
+  padding: 20px;
+  width: 250px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  transition: 0.3s;
+  color: black;
+}
+.project-card:hover{transform:scale(1.05);}
+.project-card h3{margin:10px 0;font-size:20px;}
+.project-card p{margin:5px 0;font-size:16px;}
+.project-card a, .project-card button{ text-decoration:none; background:#2575fc; color:#fff; padding:8px 15px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; transition:0.3s; margin:5px; display:inline-block;}
+.project-card a:hover, .project-card button:hover{background:#6a11cb;}
+
+/* Popup Modal */
+#paymentModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:999; }
+#paymentForm { display:flex; flex-direction:column; gap:10px; width:300px; background:#fff; padding:20px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+#paymentForm input, #paymentForm button{ padding:8px; border-radius:8px; border:1px solid #ccc; font-size:16px; }
+#paymentForm button{ border:none; background:#2575fc; color:#fff; cursor:pointer; }
+#paymentForm button:hover{background:#6a11cb;}
+@media(max-width:768px){#projects{flex-direction:column;align-items:center;} .project-card{width:90%;} #paymentForm{width:90%;}}
+
+
+
+/* WhatsApp floating button */
+#whatsappBtn {
+  position: fixed;       /* screen پر فکس */
+  bottom: 20px;          /* نیچے سے فاصلے */
+  right: 20px;           /* دائیں سے فاصلے */
+  background: #25D366;   /* WhatsApp green */
+  color: white;
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;    /* circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  z-index: 999;
+}
+
+#whatsappBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Easy Marketplace</h1>
+</header>
+
+<section class="hero">
+  <h2>Trusted Marketplace for Digital Projects</h2>
+  <p>Buy digital projects with confidence. Verified payment methods, fast delivery, and WhatsApp support.</p>
+</section>
+
+<section id="projects"></section>
+
+<!-- Modal Popup -->
+<div id="paymentModal">
+  <form id="paymentForm">
+    <h3>Complete Your Payment</h3>
+    <p>Easypaisa/JazzCash: 03179891214</p>
+    <p>Binance ID: 942433606 (Tashkhan)</p>
+    <p>WhatsApp: 03179891214</p>
+    <input type="text" id="buyerName" placeholder="project Code" required>
+    <input type="email" id="buyerEmail" placeholder="Your Email" required>
+    <input type="text" id="transactionID" placeholder="Transaction ID" required>
+    <button type="submit">Submit & Send WhatsApp</button>
+    <button type="button" onclick="closeModal()">Cancel</button>
+  </form>
+</div>
+
+<script>
+const projectsData = [
+  {title:"⚡ tech light electric project  Code:01", price:12, demo:"https://habibkhandev.github.io/Techlight/"},
+  {title:" 🚹 protfilio project Code:02", price:9, demo:"https://habibkhandev.github.io/Portfolio/"},
+  {title:"Project 3", price:15, demo:"https://example.com/demo3"},
+  {title:"Project 4", price:15, demo:"https://example.com/demo4"},
+  {title:"Project 5", price:15, demo:"https://example.com/demo5"},
+  {title:"Project 6", price:15, demo:"https://example.com/demo6"},
+  {title:"Project 7", price:15, demo:"https://example.com/demo7"},
+  {title:"Project 8", price:15, demo:"https://example.com/demo8"},
+];
+
+const projectsContainer = document.getElementById('projects');
+projectsData.forEach(proj=>{
+  const card = document.createElement('div');
+  card.className = 'project-card';
+  card.innerHTML = `
+    <h3>${proj.title}</h3>
+    <p>Price: $${proj.price}</p>
+    <a href="${proj.demo}" target="_blank">Live Demo</a>
+    <button onclick="openModal('${proj.title}')">Buy Now</button>
+  `;
+  projectsContainer.appendChild(card);
+});
+
+const paymentModal = document.getElementById('paymentModal');
+
+function openModal(title){
+  paymentModal.style.display='flex';
+}
+
+function closeModal(){
+  paymentModal.style.display='none';
+}
+
+// Close modal when clicking outside form
+paymentModal.addEventListener('click', function(e){
+  if(e.target === paymentModal) closeModal();
+});
+
+const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = encodeURIComponent(document.getElementById('buyerName').value);
+  const email = encodeURIComponent(document.getElementById('buyerEmail').value);
+  const txn = encodeURIComponent(document.getElementById('transactionID').value);
+  const message = `Project Code: ${name}%0AEmail: ${email}%0ATransaction ID: ${txn}`;
+  const waNumber = '923179891214'; // WhatsApp with country code
+  const url = `https://wa.me/${waNumber}?text=${message}`;
+  window.open(url,'_blank');
+  alert('WhatsApp message opened! Your project request is sent.');
+  paymentForm.reset();
+  closeModal();
+});
+</script>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/923179891214" target="_blank" id="whatsappBtn">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+</body>
+</html>
