@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trusted Marketplace</title>
+<style>
+/* 🌐 Trusted Marketplace Modern Design */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  color: #fff;
+  text-align: center;
+}
+header {
+  background: url('Images/shop.jpg') center/cover no-repeat;
+  padding: 80px 20px 60px;
+  color: black;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* 🔘 CTA Button */
+.cta-buttons a {
+  background: #fff;
+  color: #007bff;
+  padding: 12px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.cta-buttons a:hover {
+  background: #007bff;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* 💎 Features Section */
+.features {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  gap: 25px;
+}
+
+/* 📦 Feature Cards */
+.feature-card {
+  background: #fff;
+  color: #333;
+  width: 90%;
+  max-width: 350px;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* 🖼️ Icons */
+.feature-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+.feature-card:hover img {
+  transform: scale(1.1);
+}
+
+/* 🔤 Titles */
+.feature-card h3 {
+  color: #007bff;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* 📜 Paragraphs */
+.feature-card p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* ⚓ Footer */
+footer {
+  background: rgba(0,0,0,0.15);
+  padding: 25px 10px;
+  font-size: 0.9rem;
+  color: #fff;
+  border-top: 2px solid rgba(255,255,255,0.2);
+  margin-top: 40px;
+  backdrop-filter: blur(8px);
+}
+
+/* ✨ Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 Responsive */
+@media (min-width: 700px) {
+  .features {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .feature-card {
+    width: 45%;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header>
+    <h1>🌐 Welcome to Trusted Marketplace</h1>
+    <p>Buy & sell digital projects safely and easily</p>
+    <div class="cta-buttons">
+
+      <a href="login.html">Login</a>
+
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/100/000000/lock--v1.png" alt="Secure Payments">
+      <h3>Secure Payments</h3>
+      <p>All transactions are safe and verified</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/100/000000/user-shield.png" alt="Verified Sellers">
+      <h3>Verified Sellers</h3>
+      <p>Only trusted sellers can upload projects</p>
+    </div>
+    <div class="feature-card">
+<img src="https://img.icons8.com/color/96/000000/delivery.png" alt="Fast Delivery">
+      <h3>Fast Delivery</h3>
+      <p>Get projects delivered instantly after approval</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/100/000000/customer-support.png" alt="24/7 Support">
+      <h3>24/12 Support</h3>
+      <p>We are here to help you anytime</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Trusted Marketplace | Contact: 03179891214 | Email: hk6190990@gmail.com
+  </footer>
+
+</body>
+</html>
